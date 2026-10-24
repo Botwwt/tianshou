@@ -20,7 +20,7 @@ def test_uniform_box_preserves_action_shape(shape: tuple[int, ...], batch_size: 
         torch.testing.assert_close(distribution.low[index], torch.from_numpy(low))
         torch.testing.assert_close(distribution.high[index], torch.from_numpy(high))
         torch.testing.assert_close(distribution.mean[index], torch.from_numpy(low + 1))
-    samples = distribution.sample((5,))
+    samples = distribution.sample(torch.Size((5,)))
     assert samples.shape == (5, batch_size, *shape)
     assert torch.all(samples >= distribution.low)
     assert torch.all(samples < distribution.high)
